@@ -264,6 +264,38 @@ class _OrderScreenState extends State<OrderScreen> {
           ),
         ),
       ),
+      bottomNavigationBar: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.grey[200],
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              blurRadius: 4,
+              offset: const Offset(0, -2),
+            ),
+          ],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                const Icon(Icons.shopping_cart, size: 24),
+                const SizedBox(width: 8),
+                Text(
+                  '${_cart.totalItems} item${_cart.totalItems == 1 ? '' : 's'}',
+                  style: heading2,
+                ),
+              ],
+            ),
+            Text(
+              'Total: £${_cart.totalPrice.toStringAsFixed(2)}',
+              style: heading2,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
