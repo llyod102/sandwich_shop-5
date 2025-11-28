@@ -70,6 +70,42 @@ void main() {
     });
   });
 
+  group('Add to Cart', () {
+    testWidgets('shows SnackBar confirmation when adding to cart',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(const App());
+      
+      // Tap "Add to Cart" button
+      await tester.tap(find.widgetWithText(ElevatedButton, 'Add to Cart'));
+      await tester.pump(); // Start the animation
+      await tester.pump(const Duration(milliseconds: 100)); // Let SnackBar appear
+      
+      // Verify SnackBar appears with confirmation message
+      expect(find.byType(SnackBar), findsOneWidget);
+      expect(find.textContaining('Added'), findsOneWidget);
+      expect(find.textContaining('Veggie Delight'), findsOneWidget);
+      expect(find.textContaining('cart'), findsOneWidget);
+    });
+
+    testWidgets('SnackBar message includes quantity and sandwich details',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(const App());
+      
+      // Increase quantity to 2
+      await tester.tap(find.byIcon(Icons.add));
+      await tester.pump();
+      
+      // Tap "Add to Cart"
+      await tester.tap(find.widgetWithText(ElevatedButton, 'Add to Cart'));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 100));
+      
+      // Check message contains quantity
+      expect(find.textContaining('Added 2'), findsOneWidget);
+      expect(find.textContaining('footlong'), findsOneWidget);
+    });
+  });
+
   group('StyledButton', () {
     testWidgets('renders with icon and label', (WidgetTester tester) async {
       const testButton = StyledButton(
