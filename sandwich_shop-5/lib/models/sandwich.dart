@@ -32,13 +32,26 @@ class Sandwich {
   }
 
   String get image {
-    String typeString = type.name;
-    String sizeString = '';
-    if (isFootlong) {
-      sizeString = 'footlong';
-    } else {
-      sizeString = 'six_inch';
+    const String base = 'assets/images/';
+    switch (type) {
+      case SandwichType.chickenTeriyaki:
+        return base +
+            (isFootlong
+                ? 'chickenTeriyaki_footlong.jpg'
+                : 'chickenTeriyaki_six_inch.jpg');
+      case SandwichType.tunaMelt:
+        return base +
+            (isFootlong ? 'tunaMelt_footlong.jpeg' : 'tunaMelt_six_inch.jpeg');
+      case SandwichType.meatballMarinara:
+        return base +
+            (isFootlong
+                ? 'Meetball_Marinara_footlong.jpeg'
+                : 'Meetball_Marinara_six_inch.jpg');
+      case SandwichType.veggieDelight:
+        return base +
+            (isFootlong
+                ? 'veggieDelight_footlong.webp'
+                : 'veggieDelight_six_inch.jpeg');
     }
-    return 'assets/images/${typeString}_$sizeString.png';
   }
 }
